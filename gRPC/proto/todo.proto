@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package todo;
+
+// Core Todo entity
+message Todo {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    bool done = 4;
+}
+
+// CRUD messages
+message ListTodosRequest {}
+message ListTodosResponse {
+    repeated Todo todos = 1;
+}
+
+message GetTodoRequest {
+    int32 id = 1;
+}
+message GetTodoResponse {
+    Todo todo = 1;
+}
+
+message CreateTodoRequest {
+    string title = 1;
+    string description = 2;
+}
+message CreateTodoResponse {
+    Todo todo = 1;
+}
+
+message UpdateTodoRequest {
+    Todo todo = 1;
+}
+message UpdateTodoResponse {
+    Todo todo = 1;
+}
+
+message DeleteTodoRequest {
+    int32 id = 1;
+}
+message DeleteTodoResponse {
+    bool success = 1;
+}
+
+// Service definition
+service TodoService {
+    rpc ListTodos (ListTodosRequest) returns (ListTodosResponse);
+    rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+    rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+    rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse);
+    rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+}
